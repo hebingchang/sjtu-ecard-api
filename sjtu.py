@@ -33,7 +33,7 @@ class card:
         }
         data = self.sign(data)
         r = requests.post("http://card.sjtu.edu.cn/Api/Account/SignIn", data=data)
-        ret = json.loads(r.content)
+        ret = json.loads(r.content.decode('utf-8'))
         try:
             if ret["success"] == False:
                 raise cardError(ret["msg"])
@@ -58,7 +58,7 @@ class card:
         data = self.sign(data)
 
         r = requests.post("http://card.sjtu.edu.cn/Api/Card/GetCardEaccInfo", data=data)
-        return json.loads(r.content)
+        return json.loads(r.content.decode('utf-8'))
 
     def getCardInfo(self):
         logging.info("获取卡信息")
@@ -69,7 +69,7 @@ class card:
         data = self.sign(data)
 
         r = requests.post("http://card.sjtu.edu.cn/Api/Card/GetCardInfo", data=data)
-        return json.loads(r.content)
+        return json.loads(r.content.decode('utf-8'))
 
     def bankTransfer(self, amount):
         logging.info("银行卡转账￥" + str(amount))
@@ -83,7 +83,7 @@ class card:
         data = self.sign(data)
 
         r = requests.post("http://card.sjtu.edu.cn/Api/Card/BankTransferPlus", data=data)
-        ret = json.loads(r.content)
+        ret = json.loads(r.content.decode('utf-8'))
         try:
             if ret["success"] == False:
                 raise cardError(ret["msg"])
@@ -102,7 +102,7 @@ class card:
         data = self.sign(data)
 
         r = requests.post("http://card.sjtu.edu.cn/Api/PowerFee/GetXiaoQu", data=data)
-        return json.loads(r.content)
+        return json.loads(r.content.decode('utf-8'))
 
     def getBuild(self, xqid):
         logging.info("获取寝室楼")
@@ -115,7 +115,7 @@ class card:
         data = self.sign(data)
 
         r = requests.post("http://card.sjtu.edu.cn/Api/PowerFee/GetBuild", data=data)
-        return json.loads(r.content)
+        return json.loads(r.content.decode('utf-8'))
 
     def getBalance(self, xiaoqu, building, buildname, room):
         logging.info("查询 %s %s %s 剩余电费" % (xiaoqu, buildname, room))
@@ -131,7 +131,7 @@ class card:
         data = self.sign(data)
 
         r = requests.post("http://card.sjtu.edu.cn/Api/PowerFee/GetBanlace", data=data)
-        ret = json.loads(r.content)
+        ret = json.loads(r.content.decode('utf-8'))
         try:
             if ret["success"] == False:
                 raise cardError(ret["msg"])
